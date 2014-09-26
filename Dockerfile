@@ -16,6 +16,7 @@ RUN \
           python-pip \
           python-virtualenv \
           unzip \
+          vim \
           wget \
             --yes \
             --no-install-recommends \
@@ -25,7 +26,8 @@ RUN \
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Install the Google Cloud SDK CLI tools..
+# Install the Google Cloud SDK CLI tools.
+
 RUN wget \
     https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.zip \
       --no-check-certificate && \
@@ -39,13 +41,20 @@ RUN google-cloud-sdk/install.sh \
       --rc-path=/.bashrc \
       --disable-installation-options
 
-# Install the AWS CLI.
+# Install the AWS CLI and ansible.
 RUN pip install \
       awscli \
       ansible
 
-# A working volume.
-VOLUME /data
+# Add command completion for the AWS CLI.
+RUN echo "\n# Command completion for the AWS CLI.\ncomplete -C '/usr/local/bin/aws_completer' aws" >> \
+      .bashrc
+
+# Add a working volume mount point.
+VOLUME ["/data"]
+
+# Add volumes for tool configuration.
+VOLUME ["/.config", "/.aws"]
 
 # Default command.
 CMD ["bash"]
