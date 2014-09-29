@@ -10,17 +10,18 @@ RUN \
   apt-get update \
             --quiet && \
   apt-get install \ 
+            --yes \
+            --no-install-recommends \
+            --no-install-suggests \
           build-essential \
+          ca-certificates \
           python \
           python-dev \
           python-pip \
           python-virtualenv \
           unzip \
           vim \
-          wget \
-            --yes \
-            --no-install-recommends \
-            --no-install-suggests
+          wget
 
 # Clean up packages.
 RUN apt-get clean && \
@@ -29,7 +30,7 @@ RUN apt-get clean && \
 # Install the Google Cloud SDK CLI tools.
 RUN wget \
     https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.zip \
-      --no-check-certificate && \
+      --ca-certificate /usr/local/share/certs/ca-root-nss.crt && \
     unzip google-cloud-sdk.zip && \
     rm google-cloud-sdk.zip
 
