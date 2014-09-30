@@ -50,7 +50,8 @@ RUN pip install \
 # Install Python packages to support Ansible modules.
 RUN pip install \
       apache-libcloud \
-      boto 
+      boto \
+      docker-py 
 
 # Add command completion for the AWS CLI.
 RUN echo "\n# Command completion for the AWS CLI.\ncomplete -C '/usr/local/bin/aws_completer' aws" >> \
