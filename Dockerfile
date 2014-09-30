@@ -47,6 +47,10 @@ RUN pip install \
       awscli \
       ansible
 
+# Install Python packages to support Ansible modules.
+RUN pip install \
+      boto  
+
 # Add command completion for the AWS CLI.
 RUN echo "\n# Command completion for the AWS CLI.\ncomplete -C '/usr/local/bin/aws_completer' aws" >> \
       /.bashrc
