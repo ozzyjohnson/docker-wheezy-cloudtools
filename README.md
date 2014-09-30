@@ -25,14 +25,11 @@ At minimum, the ```/.boto``` (file) and ```/.gce``` (dir) mounts should be prepa
 	aws_access_key_id = <your_access_key_here>
 	aws_secret_access_key = <your_secret_key_here>
 
-**/.gce/secrets.py**
-
-	GCE_PARAMS = ('long...@developer.gserviceaccount.com', '/path/to/converted.pem')
-	GCE_KEYWORD_PARAMS = {'project': 'my_project_id'}
+If you aren't familiar with AWS access keys, reference my quick guide to [Creating an IAM user](http://ozzyjohnson.github.io/aws10/#Creating-an-IAM-User).
 
 **/.gce/converted.pem**
 
-A keyfile, generated using the commands shown, from a P12 key associated with a project Service Account.
+A keyfile, generated using the commands shown below, from a ```.p12``` key associated with a GCE cloud project Service Account. 
 
 	openssl pkcs12 \
 	  -in generated.p12 \
@@ -42,11 +39,20 @@ A keyfile, generated using the commands shown, from a P12 key associated with a 
 	  openssl rsa \
 	    -out converted.pem
 
+Salt provides an excellent set of [instructions](http://docs.saltstack.com/en/latest/topics/cloud/gce.html#google-compute-engine-setup) for creating a new cloud project, service account and generating / converting the required key. 
+
+Be sure to take note of your resulting ```Project ID``` and Service Account Email Address for use in ```secrets.py``` as shown below.
+
+**/.gce/secrets.py**
+
+	GCE_PARAMS = ('long...@developer.gserviceaccount.com', '/path/to/converted.pem')
+	GCE_KEYWORD_PARAMS = {'project': 'my_project_id'}
+
 <br>
 
 #### Name:
 
-Creating a set of volumes for export to future containers with the convenience of ```--volumes-from```. 
+Creating a set of volumes for export to future containers with the convenience of ```--volumes-from``` in place a list of mounts. 
 
 	docker run \
 	  --name cloudtools-auth \
@@ -64,15 +70,15 @@ Once configured, this image can be run interactively or executable style.
 **Interactive:**
 
  	docker run \
-	--volumes-from cloudtools-auth \
-	-it --rm wheezy-cloudtools 
+	  --volumes-from cloudtools-auth \
+	  -it --rm wheezy-cloudtools 
 
 **Executable:**
 
 	docker run \
-	--volumes-from cloudtools-auth \
-	-it --rm wheezy-cloudtools \
-	ansible-playbook -i *, /data/ec2.yml
+	  --volumes-from cloudtools-auth \
+	  -it --rm wheezy-cloudtools \
+	  ansible-playbook -i *, /data/ec2.yml
 
 **ec2.yml**
 
