@@ -11,7 +11,7 @@ There are existing images for each of these tools in isolation, but none that co
 
 #### Pull:
 
-docker pull ozzyjohnson/wheezy-cloudtools
+```docker pull ozzyjohnson/wheezy-cloudtools```
 
 <br>
 
@@ -35,7 +35,7 @@ At minimum, the ```/.boto``` (file) and ```/.gce``` (dir) mounts should be prepa
 A keyfile, generated using the commands shown, from a P12 key associated with a project Service Account.
 
 	openssl pkcs12 \
-	  -in ORIG.p12 \
+	  -in generated.p12 \
 	  -passin pass:notasecret \
 	  -nodes \
 	  -nocerts | \
@@ -57,7 +57,17 @@ Creating a set of volumes for export to future containers with the convenience o
 
 <br>
 
-### Run:
+#### Run:
+
+Once configured, this image can be run interactively or executable style.
+
+**Interactive:**
+
+ 	docker run \
+	--volumes-from cloudtools-auth \
+	-it --rm wheezy-cloudtools 
+
+**Executable:**
 
 	docker run \
 	--volumes-from cloudtools-auth \
