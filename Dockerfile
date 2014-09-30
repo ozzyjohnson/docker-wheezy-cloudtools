@@ -61,7 +61,7 @@ RUN echo "\n# Command completion for the AWS CLI.\ncomplete -C '/usr/local/bin/a
 VOLUME ["/data"]
 
 # Add volumes for tool configuration.
-VOLUME ["/.ansible.cfg", "/.aws", "/.config"]
+VOLUME ["/.ansible.cfg", "/.aws", "/.boto", "/.config"]
 
 # Default command.
 CMD ["bash"]
