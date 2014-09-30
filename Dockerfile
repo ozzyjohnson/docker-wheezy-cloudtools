@@ -15,6 +15,7 @@ RUN \
             --no-install-suggests \
           build-essential \
           ca-certificates \
+          openssh-client \
           python \
           python-dev \
           python-pip \
