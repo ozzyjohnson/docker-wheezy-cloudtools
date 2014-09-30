@@ -63,5 +63,8 @@ VOLUME ["/data"]
 # Add volumes for tool configuration.
 VOLUME ["/.ansible.cfg", "/.aws", "/.boto", "/.config", "/.gce"]
 
+# Environment for Ansible gce module.
+ENV PYTHONPATH /.gce
+
 # Default command.
 CMD ["bash"]
