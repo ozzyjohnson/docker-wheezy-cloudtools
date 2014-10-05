@@ -41,7 +41,7 @@ A keyfile, generated using the commands shown below, from a ```.p12``` key assoc
 
 Salt provides an excellent set of [instructions](http://docs.saltstack.com/en/latest/topics/cloud/gce.html#google-compute-engine-setup) for creating a new cloud project, service account and generating / converting the required key. 
 
-Be sure to take note of your resulting ```Project ID``` and Service Account Email Address for use in ```secrets.py``` as shown below.
+Be sure to take note of your resulting ```Project ID``` and ```Service Account Email Address``` for use in ```secrets.py``` as shown below.
 
 **/.gce/secrets.py**
 
@@ -52,7 +52,7 @@ Be sure to take note of your resulting ```Project ID``` and Service Account Emai
 
 #### Name:
 
-Creating a set of volumes for export to future containers with the convenience of ```--volumes-from``` in place a list of mounts. 
+Create a set of volumes for export to future containers with the convenience of ```--volumes-from``` in place a list of mounts. 
 
 	docker run \
 	  --name cloudtools-auth \
