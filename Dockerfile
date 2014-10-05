@@ -28,9 +28,6 @@ RUN \
   apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Prepare to install.
-WORKDIR /tmp
-
 # Install the Google Cloud SDK CLI tools.
 RUN wget \
     https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.zip \
@@ -42,9 +39,7 @@ RUN wget \
       --disable-installation-options \
       --path-update=true \
       --rc-path=/.bashrc \
-      --usage-reporting=true && \
-    cd /tmp && \
-    rm -rf google-cloud-sdk
+      --usage-reporting=true
 
 # Install the AWS CLI and ansible.
 RUN pip install \
