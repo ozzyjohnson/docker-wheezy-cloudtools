@@ -22,25 +22,29 @@ RUN \
           python-virtualenv \
           unzip \
           vim \
-          wget
+          wget && \
 
 # Clean up packages.
-RUN apt-get clean && \
+  apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+# Prepare to install.
+WORKDIR /tmp
 
 # Install the Google Cloud SDK CLI tools.
 RUN wget \
     https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.zip \
       --ca-certificate /usr/local/share/certs/ca-root-nss.crt && \
     unzip google-cloud-sdk.zip && \
-    rm google-cloud-sdk.zip
-
-RUN google-cloud-sdk/install.sh \
+    rm google-cloud-sdk.zip && \
+    google-cloud-sdk/install.sh \
       --bash-completion=true \
       --disable-installation-options \
       --path-update=true \
       --rc-path=/.bashrc \
-      --usage-reporting=true
+      --usage-reporting=true && \
+    cd /tmp && \
+    rm -rf google-cloud-sdk
 
 # Install the AWS CLI and ansible.
 RUN pip install \
