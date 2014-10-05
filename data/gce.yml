@@ -1,0 +1,13 @@
+# Basic provisioning example
+- hosts: 127.0.0.1
+  connection: local
+  tasks:
+  - local_action:
+      module: gce
+      #project_id: planar-ripsaw-217
+      name: test-instance-01
+      zone: us-central1-a
+      machine_type: n1-standard-1
+      image: debian-7
+      #service_account_email: 585876971904-id9jt82pk0hr38g86j03o5vra5o0bhic@developer.gserviceaccount.com
+      #pem_file: /data/test.pem

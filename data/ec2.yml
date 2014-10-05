@@ -1,0 +1,12 @@
+# Basic provisioning example
+- hosts: 127.0.0.1
+  connection: local
+  tasks:
+    - local_action:
+        module: ec2
+        key_name: vpn
+        region: us-east-1
+        instance_type: t1.micro
+        image: ami-0870c460
+        wait: yes
+        count: 1
