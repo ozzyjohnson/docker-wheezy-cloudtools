@@ -19,7 +19,6 @@ RUN \
           python \
           python-dev \
           python-pip \
-          python-virtualenv \
           unzip \
           vim \
           wget && \
@@ -40,6 +39,13 @@ RUN wget \
       --path-update=true \
       --rc-path=/.bashrc \
       --usage-reporting=true
+
+# Update pip and set up virtualenv.
+RUN pip install \
+      -U pip
+
+RUN pip install \
+      virtualenv
 
 # Install the AWS CLI and ansible.
 RUN pip install \
