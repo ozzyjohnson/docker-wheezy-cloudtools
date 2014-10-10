@@ -1,5 +1,5 @@
 # Google mirrors are very fast.
-FROM google/debian:wheezy
+FROM ozzyjohnson/wheezy-python
 
 MAINTAINER Ozzy Johnson <ozzy.johnson@gmail.com>
 
@@ -13,12 +13,8 @@ RUN \
             --yes \
             --no-install-recommends \
             --no-install-suggests \
-          build-essential \
           ca-certificates \
           openssh-client \
-          python \
-          python-dev \
-          python-pip \
           unzip \
           vim \
           wget && \
