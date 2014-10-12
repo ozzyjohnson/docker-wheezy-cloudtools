@@ -60,10 +60,10 @@ RUN echo "\n# Command completion for the AWS CLI.\ncomplete -C '/usr/local/bin/a
       /.bashrc
 
 # Add a working volume mount point.
-VOLUME ["/data"]
+ONBUILD VOLUME ["/data"]
 
 # Add volumes for tool configuration.
-VOLUME ["/.ansible.cfg", "/.aws", "/.boto", "/.config", "/.gce"]
+ONBUILD VOLUME ["/.ansible.cfg", "/.aws", "/.boto", "/.config", "/.gce"]
 
 # Environment for Ansible gce module.
 ENV PYTHONPATH /.gce
