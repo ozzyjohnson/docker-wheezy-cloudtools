@@ -14,6 +14,7 @@ RUN \
             --no-install-recommends \
             --no-install-suggests \
           ca-certificates \
+	  curl \
           openssh-client \
           unzip \
           vim \
