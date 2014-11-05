@@ -40,7 +40,7 @@ Setup:
         --name gcloud-auth \
         gcloud-test \
         gcloud auth login \
-	--project your-project-123
+        --project your-project-123
 
 Going Forward:
     
@@ -53,11 +53,11 @@ Alternatively, we can configure a service account in /.gce.
 A keyfile, generated using the commands shown below, from a ```.p12``` key associated with a GCE cloud project Service Account. 
 
     openssl pkcs12 \
-      -in generated.p12 \
-      -passin pass:notasecret \
-      -nodes \
-      -nocerts | \
-      openssl rsa \
+        -in generated.p12 \
+        -passin pass:notasecret \
+        -nodes \
+        -nocerts | \
+        openssl rsa \
         -out converted.pem
 
 Salt provides an excellent set of [instructions](http://docs.saltstack.com/en/latest/topics/cloud/gce.html#google-compute-engine-setup) for creating a new cloud project, service account and generating / converting the required key. 
@@ -74,17 +74,17 @@ With that done, we can configure the account like so.
 Setup:
 
     docker run -it \
-	-v /home/ubuntu/data/.config:/.config \
+        -v /home/ubuntu/data/.config:/.config \
         --name gcloud-service \
         ozzyjohnson/cloudtools
 
 From the interactive prompt.
 
-        gcloud auth activate-service-account \
-	`awk -F\' 'NR==1{print $2}' /.gce/secrets.py` \
-	--key-file \
-	`awk -F\' 'NR==1{print $4}' /.gce/secrets.py` \
-	--project your-project-123
+    gcloud auth activate-service-account \
+        `awk -F\' 'NR==1{print $2}' /.gce/secrets.py` \
+        --key-file \
+        `awk -F\' 'NR==1{print $4}' /.gce/secrets.py` \
+        --project your-project-123
 
 Going Forward:
 
@@ -97,15 +97,16 @@ Once configured, this image can be run interactively or executable style.
 **Interactive:**
 
      docker run \
-      --volumes-from cloudtools-auth \
-      -it --rm wheezy-cloudtools 
+         --volumes-from cloudtools-auth \
+         -it \
+         --rm wheezy-cloudtools 
 
 **Executable:**
 
     docker run \
-      --volumes-from cloudtools-auth \
-      -it --rm wheezy-cloudtools \
-      ansible-playbook -i *, /data/ec2.yml
+        --volumes-from cloudtools-auth \
+        -it --rm wheezy-cloudtools \
+        ansible-playbook -i *, /data/ec2.yml
 
 **ec2.yml**
 
