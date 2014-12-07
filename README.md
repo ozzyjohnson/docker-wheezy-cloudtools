@@ -1,6 +1,8 @@
 docker-wheezy-cloudtools
 ========================
 
+Built: 2014.12.06
+
 The AWS CLI, GCE SDK and Ansible built on a minimal Google Wheezy.
 
 #### Why:
